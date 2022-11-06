@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CrudCategoriaService {
+public class CategoriaService {
 
     private final CategoriaRepository categoriaRepository;
 
-    public CrudCategoriaService(CategoriaRepository categoriaRepository) {
+    public CategoriaService(CategoriaRepository categoriaRepository) {
         this.categoriaRepository = categoriaRepository;
     }
 
@@ -25,8 +25,8 @@ public class CrudCategoriaService {
     }
 
     public Iterable<Categoria> visualizar() {
-        Iterable<Categoria> cargos = categoriaRepository.findAll();
-        return cargos;
+        Iterable<Categoria> categorias = categoriaRepository.findAll();
+        return categorias;
     }
 
     public void deletar(Long id) {

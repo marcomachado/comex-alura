@@ -1,16 +1,15 @@
 package br.com.alura.comex.services;
 
-import br.com.alura.comex.model.Cliente;
 import br.com.alura.comex.model.Pedido;
 import br.com.alura.comex.repositories.PedidoRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CrudPedidoService {
+public class PedidoService {
 
     private final PedidoRepository pedidoRepository;
 
-    public CrudPedidoService(PedidoRepository pedidoRepository) {
+    public PedidoService(PedidoRepository pedidoRepository) {
         this.pedidoRepository = pedidoRepository;
     }
 

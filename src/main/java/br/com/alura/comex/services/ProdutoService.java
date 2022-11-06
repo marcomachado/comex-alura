@@ -11,12 +11,12 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 
 @Service
-public class CrudProdutoService {
+public class ProdutoService {
 
     private final ProdutoRepository produtoRepository;
-    private final CrudCategoriaService crudCategoriaService;
+    private final CategoriaService crudCategoriaService;
 
-    public CrudProdutoService(ProdutoRepository produtoRepository, CrudCategoriaService crudCategoriaService) {
+    public ProdutoService(ProdutoRepository produtoRepository, CategoriaService crudCategoriaService) {
         this.produtoRepository = produtoRepository;
         this.crudCategoriaService = crudCategoriaService;
     }

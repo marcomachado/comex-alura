@@ -5,12 +5,12 @@ import br.com.alura.comex.repositories.ClienteRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CrudClienteService {
+public class ClienteService {
 
     private final ClienteRepository clienteRepository;
 
 
-    public CrudClienteService(ClienteRepository clienteRepository) {
+    public ClienteService(ClienteRepository clienteRepository) {
         this.clienteRepository = clienteRepository;
     }
 

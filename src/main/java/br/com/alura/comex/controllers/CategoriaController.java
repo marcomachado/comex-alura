@@ -5,7 +5,7 @@ import br.com.alura.comex.controllers.dto.PedidoPorCategoriaDto;
 import br.com.alura.comex.controllers.dto.RelatorioCategoriaDto;
 import br.com.alura.comex.controllers.form.CategoriaForm;
 import br.com.alura.comex.model.Categoria;
-import br.com.alura.comex.services.CrudCategoriaService;
+import br.com.alura.comex.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ import java.util.List;
 public class CategoriaController {
 
     @Autowired
-    CrudCategoriaService crudCategoriaService;
+    CategoriaService crudCategoriaService;
 
     @PostMapping
     public ResponseEntity<CategoriaDto> cadastrar(@RequestBody @Valid CategoriaForm form, UriComponentsBuilder uriBuilder) {
@@ -32,7 +32,14 @@ public class CategoriaController {
         crudCategoriaService.salvar(c);
 
         URI uri = uriBuilder.path("/categorias/{id}").buildAndExpand(c.getId()).toUri();
-        return ResponseEntity.created(uri).body(new CategoriaDto(c));
+        return ResponseEntity.created(uri).body(new CategoriaDto(c.getId(), c.getNome()));
+    }
+
+    @GetMapping
+    public List<CategoriaDto> lista() {
+        Iterable<Categoria> categorias = crudCategoriaService.visualizar();
+
+        return CategoriaDto.converter((List<Categoria>) categorias);
     }
 
     @GetMapping
