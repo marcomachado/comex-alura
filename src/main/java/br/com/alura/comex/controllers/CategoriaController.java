@@ -1,20 +1,23 @@
 package br.com.alura.comex.controllers;
 
 import br.com.alura.comex.controllers.dto.CategoriaDto;
+import br.com.alura.comex.controllers.dto.PedidoPorCategoriaDto;
+import br.com.alura.comex.controllers.dto.RelatorioCategoriaDto;
 import br.com.alura.comex.controllers.form.CategoriaForm;
 import br.com.alura.comex.model.Categoria;
-import br.com.alura.comex.repositories.CategoriaRepository;
 import br.com.alura.comex.services.CrudCategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 
 @RestController
-@RequestMapping("/categorias")
+@RequestMapping("api/categorias")
 public class CategoriaController {
 
     @Autowired
@@ -34,7 +37,9 @@ public class CategoriaController {
 
     @GetMapping
     @RequestMapping("/pedidos")
-    public void relatorioPedidoPorCategoria() {
-
+    @Cacheable(value = "relatorioPedidos")
+    public ResponseEntity<RelatorioCategoriaDto> relatorioPedidoPorCategoria() {
+        List<PedidoPorCategoriaDto> pedidoPorCategoriaDtos = crudCategoriaService.relatorioPedidoCategoria();
+        return ResponseEntity.ok(new RelatorioCategoriaDto(pedidoPorCategoriaDtos));
     }
 }
